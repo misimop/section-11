@@ -35,7 +35,7 @@ Fitness Progression:
 Key Performance Markers:
   Sweetspot power: [XXX]W → [XXX]W (target: [XXX]W — [hit/miss])
   VO2max power: [XXX]W → [XXX]W (target: [XXX]W — [hit/miss])
-  Long ride duration: [X.X]h → [X.X]h
+  Long ride duration: [XhYm] → [XhYm]
   Long ride decoupling trend: [X.X]% → [X.X]% [↑/↓/→]
   Best 20-min power: [XXX]W (week [X])
   Best 5-min power: [XXX]W (week [X])
@@ -70,7 +70,7 @@ Efficiency Factor by Week:
 Wellness (block avg vs previous block):
   HRV: [XX] ms (prev block: [XX] ms) [↑/↓/→] [assessment]
   RHR: [XX] bpm (prev block: [XX] bpm) [↑/↓/→] [assessment]
-  Sleep: [X.X]h (prev block: [X.X]h) [↑/↓/→] [assessment]
+  Sleep: [XhYm] (prev block: [XhYm]) [↑/↓/→] [assessment]
   Avg RI: [X.XX] (prev block: [X.XX])
   Avg Monotony: [X.XX] ([note])
 
@@ -144,3 +144,7 @@ Next Block Plan:
 - **Next Block Plan** should flow directly from the Phase Progression Check — if criteria aren't met, explain what the next block does differently
 - Keep "Interpretation" to coaching interpretation — the data is already presented above
 - Block reports are the most detailed report type (~45-60 lines) — this is where the deep analysis lives
+
+## Formatting Rule
+
+- **Durations and sleep:** Always use `_formatted` fields from JSON (e.g., `sleep_formatted`, `duration_formatted`, `total_training_formatted`). Never convert decimal `_hours` fields to display format — the formatted values are pre-calculated from raw seconds and avoid rounding errors.
