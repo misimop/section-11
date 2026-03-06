@@ -94,8 +94,8 @@ You are my endurance cycling coach. Follow Section 11 protocol strictly.
 
 ## DATA ACCESS:
 1. Note today's date
-2. Fetch: https://raw.githubusercontent.com/[you]/[repo]/main/latest.json
-3. Fetch: https://raw.githubusercontent.com/[you]/[repo]/main/history.json
+2. Fetch: https://raw.githubusercontent.com/[you]/[repo]/main/latest.json (append ?date= with today's date to ensure fresh data)
+3. Fetch: https://raw.githubusercontent.com/[you]/[repo]/main/history.json (append ?date= with today's date to ensure fresh data)
 4. If activities don't match today's date, re-fetch before concluding no data exists
 
 Do NOT ask me for data — fetch it yourself.
@@ -223,7 +223,6 @@ Cowork runs on your local machine and can read files directly from your filesyst
 
 1. Install: `npm install -g @google/gemini-cli` (or `npx @google/gemini-cli`)
 2. Clone your data repo locally — Gemini CLI has full filesystem access
-3. Supports MCP extensions for additional tool integration
 
 ### Pushing Workouts to Calendar
 
