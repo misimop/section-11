@@ -44,7 +44,7 @@ Your data stays on your machine or in repos you control. Section 11 does not run
 
 > **Recommended:** Paste [SETUP_ASSISTANT.md](SETUP_ASSISTANT.md) into ChatGPT, Claude, Gemini, or any AI chat, and it will walk you through everything below step by step. This is the easiest path for most users.
 
-If you prefer to set things up manually, follow the steps below.
+You can also follow the step-by-step guides below.
 
 ### 1. Create Your Dossier
 
