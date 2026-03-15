@@ -342,6 +342,12 @@ If your platform doesn't support connectors or you can't get them working: use a
 - Check workflow permissions are set to "Read and write" (Settings → Actions → General → Workflow permissions)
 - See [examples/json-auto-sync/SETUP.md](examples/json-auto-sync/SETUP.md) for workflow-specific issues
 
+### Activities show null or missing fields
+
+If your device syncs through Strava, the API returns stripped data. Strava's API terms restrict detailed fields when accessed through third-party APIs — Intervals.icu shows everything in the UI, but the API returns empty fields.
+
+**Fix:** Connect your device (Garmin, Wahoo, etc.) directly to Intervals.icu in Settings → Connections. Keep Strava connected if you want, but the training data needs to come in direct.
+
 ### Gemini can't access your repo or ignores data
 
 - Enable the GitHub extension: gemini.google.com → Settings → Extensions (Connected Apps) → turn on GitHub

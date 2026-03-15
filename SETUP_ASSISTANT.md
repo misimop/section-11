@@ -79,6 +79,7 @@ Both sync methods work with both platform types. The four valid combinations:
 Check that they have:
 
 1. **An Intervals.icu account** — if not, direct them to https://intervals.icu (it's free, connects via Strava/Garmin/etc.)
+   - **Important:** Their device (Garmin, Wahoo, etc.) should be connected **directly** to Intervals.icu, not only through Strava. Strava's API terms strip detailed data from activities — Intervals.icu shows everything in the UI, but the API returns empty fields. Direct connection in Intervals.icu Settings → Connections.
 2. **A GitHub account** (GitHub path only) — if not, direct them to https://github.com/signup. Not needed for the local path.
 
 Confirm before continuing.
