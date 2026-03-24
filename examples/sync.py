@@ -3,6 +3,9 @@
 Intervals.icu → GitHub/Local JSON Export
 Exports training data for LLM access.
 Supports both automated GitHub sync and manual local export.
+  
+Version 3.92 - Local-Sync: --update auto-clears history.json + intervals.json when sync.py
+  changes. Prevents stale-schema bugs. Full data restored after 2 sync cycles.
 
 Version 3.91 - Sustainability Profile: per-sport power/HR sustainability table for race estimation.
   42-day window, sport-filtered curves (power-curves + hr-curves per sport family). Cycling gets
@@ -58,7 +61,7 @@ class IntervalsSync:
     HISTORY_FILE = "history.json"
     UPSTREAM_REPO = "CrankAddict/section-11"
     CHANGELOG_FILE = "changelog.json"
-    VERSION = "3.91"
+    VERSION = "3.92"
     INTERVALS_FILE = "intervals.json"
 
     # Sport families eligible for interval-level data extraction.
@@ -6751,6 +6754,23 @@ def do_update():
             print(f"\n   Updated {len(updated)} file{'s' if len(updated) != 1 else ''}, {len(failed)} failed")
         elif updated:
             print(f"\n   ✅ {len(updated)} file{'s' if len(updated) != 1 else ''} updated")
+
+        # --- Cache invalidation: sync.py schema change ---
+        sync_updated = any(u["path"] == "examples/sync.py" for u in updated)
+        if sync_updated:
+            cache_cleared = []
+            for cache_file in ("history.json", "intervals.json"):
+                cache_path = data_dir / cache_file
+                if cache_path.exists():
+                    try:
+                        cache_path.unlink()
+                        cache_cleared.append(cache_file)
+                    except Exception as e:
+                        print(f"   ⚠️  Could not delete {cache_file}: {e}")
+            if cache_cleared:
+                print(f"\n   🔄 sync.py updated → cleared {', '.join(cache_cleared)}")
+                print(f"      Timer users: full data after 2 cycles (~2 min)")
+                print(f"      Manual users: run sync twice to rebuild")
 
     # --- Orphan cleanup (runs regardless of whether files were updated) ---
     orphaned_files = _find_orphaned_files(upstream_files, target_dir)
