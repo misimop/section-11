@@ -43,7 +43,7 @@ Your data stays on your machine or in repos you control. Section 11 does not run
 
 The setup paths documented here are proven starting points — not the only ways to use Section 11. The protocol is open, and the data is yours. Build what fits you.
 
-For the full experience, an agentic platform with persistent memory and code execution unlocks the complete project, especially with the local sync pipeline. See [Agentic Setup](#agentic-setup).
+For the full experience, an agentic platform with persistent memory and code execution unlocks the complete project. See [Agentic Setup](#agentic-setup).
 
 ---
 
@@ -64,6 +64,8 @@ Keep your Intervals.icu data fresh for your AI coach automatically.
 **[Local sync](examples/json-local-sync/SETUP.md)** — a script on a machine you control syncs your data on a 60-second timer. Your AI reads directly from the filesystem or via a cloud connector (Google Drive, OneDrive — [platform support varies](#platform-setup)).
 
 **[GitHub sync](examples/json-auto-sync/SETUP.md)** — GitHub Actions syncs every 15 minutes to a private repo. Your AI reads via GitHub connector or raw URL.
+
+**[On-demand sync](examples/json-on-demand/SETUP.md)** — trigger a sync from your phone or browser via your repo's README. Download the data as a ZIP artifact. No schedule, no local Python.
 
 **[Manual export](examples/json-manual/SETUP.md)** — run once, upload the file. No automation.
 
@@ -403,7 +405,7 @@ Standardized metadata schema for audit trails:
   "validation_metadata": {
     "data_source_fetched": true,
     "json_fetch_status": "success",
-    "protocol_version": "11.20",
+    "protocol_version": "11.24",
     "checklist_passed": [0, 1, 2, 3, 4, 5, 6, "6b", 7, 8, 9, 10],
     "checklist_failed": [],
     "data_timestamp": "2026-01-23T10:02:07Z",

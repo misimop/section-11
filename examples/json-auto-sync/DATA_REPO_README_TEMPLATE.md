@@ -19,6 +19,10 @@
 Automated training data pipeline from [Intervals.icu](https://intervals.icu) for AI coaching analysis.
 Built on the [Section 11 Protocol](https://github.com/CrankAddict/section-11).
 
+## Sync Now
+
+[🔄 Sync Now](../../actions/workflows/auto-sync.yml) — tap **Run workflow** to trigger a fresh sync. When the run completes, download the **training-data** artifact ZIP from the run page.
+
 ## Data URLs
 
 | File | Description | Link |

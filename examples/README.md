@@ -9,6 +9,7 @@ Working implementations for Section 11 integrations.
 | [SETUP_ASSISTANT.md](../SETUP_ASSISTANT.md) | Interactive AI-guided setup — paste into any AI chat | ✅ Ready |
 | [json-auto-sync](json-auto-sync/) | Automated GitHub Actions sync (every 15 min) | ✅ Ready |
 | [json-local-sync](json-local-sync/) | Automated local sync for agentic platforms (no GitHub) | ✅ Ready |
+| [json-on-demand](json-on-demand/) | On-demand sync from phone or browser — no local Python | ✅ Ready |
 | [json-manual](json-manual/) | Manual export from Mac/PC | ✅ Ready |
 | [reports](reports/) | Pre/post workout report templates | ✅ Ready |
 | [agentic](agentic/) | Write planned workouts to Intervals.icu calendar (code execution required) | ✅ Ready |
@@ -36,6 +37,12 @@ Best for: One-off exports, different time ranges, no GitHub needed.
 Best for: Agentic platforms (OpenClaw, Claude Code, Cowork, etc.) running on the same machine as your data. Always-fresh data, no GitHub needed, maximum privacy.
 
 → [json-local-sync/SETUP.md](json-local-sync/SETUP.md)
+
+### Option D: On-Demand Sync
+
+Best for: Phone or browser users who want fresh data without a schedule or local Python. Trigger a sync from your repo's README, download the results.
+
+→ [json-on-demand/SETUP.md](json-on-demand/SETUP.md)
 
 ---
 

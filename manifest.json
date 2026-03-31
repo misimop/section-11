@@ -11,7 +11,7 @@
       "hash": "0683b6ae3ded5701305dae4114d317d4346c175824d8db87a22d18e05a61ff77"
     },
     "README.md": {
-      "hash": "396ba4ea062fa05b70e8f48025e4bf54b5269aa6bf610328dc5a7e3674c99388"
+      "hash": "c41164a1c2085c4aaa052240ad824cd9d7f0760defbdefa5bcb863a3fc1aaf8b"
     },
     "SECTION_11.md": {
       "hash": "17fed9a5486fac420a80f76d93e906c2713a591e7cff53f99e77e5d9af870e69",
@@ -30,7 +30,7 @@
       "hash": "85b4458a9d400d92cd763e07041b0a9898c7908cdc3d44ef78687c6537eb4716"
     },
     "examples/README.md": {
-      "hash": "eac375b1b94f517b579dd28f8780c4a0d6400ed618f9de8643d4c36e063a67a1"
+      "hash": "1220f67257f4de1c7393be1e4d05bac298f8870cf7f93abdc8bfc9422a340981"
     },
     "examples/agentic/README.md": {
       "hash": "c5aed7fc8ac04d54c006b2f0b49e26ede7fda52e38ba134b1919fc945352dd42"
@@ -45,13 +45,13 @@
       "hash": "a44e7f207b44f190ab43bf6cb56f415a7cdef2e6aff072a2653ab090fa790b21"
     },
     "examples/json-auto-sync/DATA_REPO_README_TEMPLATE.md": {
-      "hash": "afe6daa65d7555768042e40f1c1f0094f5017b9ab5528d35732c78eb2ef0bd72"
+      "hash": "7446964abd30bc8e04959986dc3f98e3e7df2bfa985c39d94b81292b01d75d9f"
     },
     "examples/json-auto-sync/SETUP.md": {
       "hash": "86d745fa1195808419919b84f16e5d074095a6ef9cb7ade1ed9a3736ec3335e2"
     },
     "examples/json-auto-sync/auto-sync.yml": {
-      "hash": "482f91cb7cf0a7fbb14bf8ebba271e2656c6f226add514b59002158208f8cb79"
+      "hash": "0e72e61ab49c6bea53b9d827bf9001f4680e0164358dd6f58fac87f86642a8b9"
     },
     "examples/json-examples/README.md": {
       "hash": "eb3a89811904ff7ac3c3bb1d46761e3dee680cf9fe0ea29dec2b72a809bd6d1b"
@@ -73,6 +73,9 @@
     },
     "examples/json-manual/SETUP.md": {
       "hash": "bffe34f1e222ff1c98f3f59ce2f53ac72a0d7e10c61f3c99425f3e703905f73b"
+    },
+    "examples/json-on-demand/SETUP.md": {
+      "hash": "8a4cf6b9f4406ee0c237f23ca26cbc423ecc4d97f0c81f79b0ac79df47a4d102"
     },
     "examples/reports/BLOCK_REPORT_EXAMPLES.md": {
       "hash": "91741b3c2975fc50c36638744f2f43069b124d7780a818674569522fc8cc6778"
