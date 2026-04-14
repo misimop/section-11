@@ -66,6 +66,8 @@ jobs:
           echo "  GITHUB_REPO: $GITHUB_REPO"
           echo ""
           echo "🚀 Running sync script..."
+          working-directory: examples/json-auto-sync
+          run: python sync.py
           python sync.py \
             --athlete-id "$ATHLETE_ID" \
             --intervals-key "$INTERVALS_KEY" \
