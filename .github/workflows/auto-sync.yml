@@ -2,9 +2,8 @@ name: Auto-Sync Intervals.icu Data
 
 on:
   schedule:
-    # Run every 15 minutes
     - cron: '*/15 * * * *'
-  workflow_dispatch:  # Allow manual trigger
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -24,18 +23,16 @@ jobs:
           python-version: '3.11'
       
       - name: Install dependencies
-        run: |
-          pip install requests
+        run: pip install requests
       
       - name: Verify sync.py exists
         run: |
-          if [ ! -f examples/json-auto-sync/sync.py ]; then
-            echo "❌ ERROR: sync.py not found!"
-            ls -la examples/json-auto-sync/
+          if [ ! -f sync.py ]; then
+            echo "❌ ERROR: sync.py not found in repo root!"
+            ls -la
             exit 1
           fi
-          echo "✅ sync.py found"
-          echo "File size: $(wc -c < examples/json-auto-sync/sync.py) bytes"
+          echo "✅ sync.py found ($(wc -c < sync.py) bytes)"
       
       - name: Verify secrets are set
         run: |
@@ -58,57 +55,22 @@ jobs:
           WEEK_START: ${{ secrets.WEEK_START }}
           ZONE_PREFERENCE: ${{ secrets.ZONE_PREFERENCE }}
         run: |
-          echo "🔍 Debug info:"
-          echo "  Python version: $(python --version)"
-          echo "  Working directory: $(pwd)"
-          echo "  ATHLETE_ID: ${ATHLETE_ID:0:5}..."
-          echo "  GITHUB_REPO: $GITHUB_REPO"
-          echo ""
-          echo "🚀 Running sync script..."
           python sync.py \
             --athlete-id "$ATHLETE_ID" \
             --intervals-key "$INTERVALS_KEY" \
             --github-token "$GITHUB_TOKEN" \
             --github-repo "$GITHUB_REPO" \
-            --days 7 || {
-              echo "❌ Sync script failed with exit code $?"
-              exit 1
-            }
+            --days 7
       
-      - name: Verify latest.json was created/updated
+      - name: Commit data files
         run: |
-          if [ -f examples/json-auto-sync/latest.json ]; then
-            echo "✅ latest.json exists"
-            echo "File size: $(wc -c < examples/json-auto-sync/latest.json) bytes"
-          else
-            echo "⚠️ latest.json not found - might be no changes detected"
-          fi
-      
-      - name: Archive and commit data files
-        if: success()
-        run: |
-          YEAR_MONTH=$(date -u +"%Y-%m")
-          TIMESTAMP=$(date -u +"%Y%m%d_%H%M%S")
-          mkdir -p "archive/${YEAR_MONTH}"
-
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-
-          for f in latest.json history.json ftp_history.json intervals.json routes.json; do
-            if [ -f "examples/json-auto-sync/$f" ]; then
-              cp "examples/json-auto-sync/$f" "$f"
-              git add "$f"
-              echo "✅ Staged $f"
-            fi
-          done
-
-          if [ -f latest.json ]; then
-            cp latest.json "archive/${YEAR_MONTH}/${TIMESTAMP}.json"
-            git add "archive/"
-          fi
-
+          
+          git add -f latest.json history.json ftp_history.json intervals.json routes.json 2>/dev/null || true
+          
           git pull --rebase --autostash origin main
-
+          
           if ! git diff --staged --quiet; then
             git commit -m "Sync training data - $(date -u +"%Y-%m-%d %H:%M:%S UTC")"
             git push
@@ -117,26 +79,11 @@ jobs:
             echo "⏭️ No changes to commit"
           fi
       
-      - name: Upload data files for download
-        if: github.event_name == 'workflow_dispatch'
-        uses: actions/upload-artifact@v4
-        with:
-          name: training-data
-          path: |
-            latest.json
-            history.json
-            intervals.json
-            routes.json
-            ftp_history.json
-          retention-days: 7
-          if-no-files-found: ignore
-      
       - name: Show result
         run: |
-          echo "✅ Sync completed successfully!"
-          echo "📊 View data: https://raw.githubusercontent.com/${{ github.repository }}/main/latest.json"
+          echo "✅ Sync completed!"
+          echo "📊 https://raw.githubusercontent.com/${{ github.repository }}/main/latest.json"
       
       - name: Notify on failure
         if: failure()
-        run: |
-          echo "::error::⚠️ Sync failed! Check the logs above for details."
+        run: echo "::error::⚠️ Sync failed! Check the logs above for details."
