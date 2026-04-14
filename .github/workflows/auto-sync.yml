@@ -29,14 +29,13 @@ jobs:
       
       - name: Verify sync.py exists
         run: |
-          if [ ! -f sync.py ]; then
-            echo "❌ ERROR: sync.py not found in repository!"
-            echo "Files in current directory:"
-            ls -la
+          if [ ! -f examples/json-auto-sync/sync.py ]; then
+            echo "❌ ERROR: sync.py not found!"
+            ls -la examples/json-auto-sync/
             exit 1
           fi
           echo "✅ sync.py found"
-          echo "File size: $(wc -c < sync.py) bytes"
+          echo "File size: $(wc -c < examples/json-auto-sync/sync.py) bytes"
       
       - name: Verify secrets are set
         run: |
@@ -58,6 +57,7 @@ jobs:
           GITHUB_REPO: ${{ github.repository }}
           WEEK_START: ${{ secrets.WEEK_START }}
           ZONE_PREFERENCE: ${{ secrets.ZONE_PREFERENCE }}
+        working-directory: examples/json-auto-sync
         run: |
           echo "🔍 Debug info:"
           echo "  Python version: $(python --version)"
@@ -66,8 +66,6 @@ jobs:
           echo "  GITHUB_REPO: $GITHUB_REPO"
           echo ""
           echo "🚀 Running sync script..."
-          working-directory: examples/json-auto-sync
-          run: python sync.py
           python sync.py \
             --athlete-id "$ATHLETE_ID" \
             --intervals-key "$INTERVALS_KEY" \
@@ -80,102 +78,44 @@ jobs:
       
       - name: Verify latest.json was created/updated
         run: |
-          if [ -f latest.json ]; then
+          if [ -f examples/json-auto-sync/latest.json ]; then
             echo "✅ latest.json exists"
-            echo "File size: $(wc -c < latest.json) bytes"
-            echo "Last modified: $(stat -c %y latest.json 2>/dev/null || stat -f %Sm latest.json)"
+            echo "File size: $(wc -c < examples/json-auto-sync/latest.json) bytes"
           else
             echo "⚠️ latest.json not found - might be no changes detected"
           fi
       
-      - name: Archive latest.json with timestamp
+      - name: Archive and commit data files
         if: success()
         run: |
-          # Create archive directory with year-month subdirectory
           YEAR_MONTH=$(date -u +"%Y-%m")
-          mkdir -p "archive/${YEAR_MONTH}"
-          
-          # Get timestamp
           TIMESTAMP=$(date -u +"%Y%m%d_%H%M%S")
-          
-          # Copy latest.json to archive if it exists
-          if [ -f latest.json ]; then
-            cp latest.json "archive/${YEAR_MONTH}/${TIMESTAMP}.json"
-            echo "✅ Archived to archive/${YEAR_MONTH}/${TIMESTAMP}.json"
-            
-            # Configure git
-            git config --local user.email "github-actions[bot]@users.noreply.github.com"
-            git config --local user.name "github-actions[bot]"
-            
-            # Stage ALL generated files BEFORE pulling to prevent
-            # "untracked working tree files would be overwritten" errors
-            git add archive/
-            if [ -f ftp_history.json ]; then
-              git add ftp_history.json
-              echo "✅ Staged ftp_history.json"
-            fi
-            if [ -f history.json ]; then
-              git add history.json
-              echo "✅ Staged history.json"
-            fi
-            if [ -f latest.json ]; then
-              git add latest.json
-              echo "✅ Staged latest.json"
-            fi
-            if [ -f intervals.json ]; then
-              git add intervals.json
-              echo "✅ Staged intervals.json"
-            fi
-            if [ -f routes.json ]; then
-              git add routes.json
-              echo "✅ Staged routes.json"
-            fi
-            
-            # Now pull - autostash will safely stash staged changes
-            git pull --rebase --autostash origin main
-            
-            # Only commit if there are changes
-            if ! git diff --staged --quiet; then
-              git commit -m "Archive training data + FTP history - $(date -u +"%Y-%m-%d %H:%M:%S UTC")"
-              git push
-              echo "✅ Archive and FTP history committed and pushed"
-            else
-              echo "⏭️  No new archive to commit"
-            fi
-          else
-            echo "⚠️ Skipping archive - no latest.json to archive"
-          fi
-      
-      - name: Update README with last sync time
-        if: success()
-        run: |
+          mkdir -p "archive/${YEAR_MONTH}"
+
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          SYNC_TIME=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
-          
-          if [ -f README.md ]; then
-            echo "Current README content (first 5 lines):"
-            head -5 README.md
-            
-            if grep -q "Last successful sync:" README.md; then
-              echo "Found existing timestamp line, updating..."
-              sed -i "s/\*\*Last successful sync:\*\*.*/\*\*Last successful sync:\*\* ${SYNC_TIME}/" README.md
-            else
-              echo "No timestamp found, adding new line..."
-              sed -i "/badge.svg)/a\\\n\*\*Last successful sync:\*\* ${SYNC_TIME}\n" README.md
+
+          for f in latest.json history.json ftp_history.json intervals.json routes.json; do
+            if [ -f "examples/json-auto-sync/$f" ]; then
+              cp "examples/json-auto-sync/$f" "$f"
+              git add "$f"
+              echo "✅ Staged $f"
             fi
-            
-            echo "Updated README content (first 5 lines):"
-            head -5 README.md
-            
-            if ! git diff --quiet README.md; then
-              git add README.md
-              git commit -m "Update last sync timestamp: ${SYNC_TIME}"
-              git push
-              echo "✅ README updated with sync time: ${SYNC_TIME}"
-            else
-              echo "⚠️ No changes detected in README"
-            fi
+          done
+
+          if [ -f latest.json ]; then
+            cp latest.json "archive/${YEAR_MONTH}/${TIMESTAMP}.json"
+            git add "archive/"
+          fi
+
+          git pull --rebase --autostash origin main
+
+          if ! git diff --staged --quiet; then
+            git commit -m "Sync training data - $(date -u +"%Y-%m-%d %H:%M:%S UTC")"
+            git push
+            echo "✅ Data committed and pushed"
+          else
+            echo "⏭️ No changes to commit"
           fi
       
       - name: Upload data files for download
@@ -201,7 +141,3 @@ jobs:
         if: failure()
         run: |
           echo "::error::⚠️ Sync failed! Check the logs above for details."
-          echo "Common issues:"
-          echo "  - Check ATHLETE_ID and INTERVALS_KEY secrets"
-          echo "  - Verify Intervals.icu API is accessible"
-          echo "  - Check GitHub token permissions"
