@@ -70,7 +70,7 @@
   },
   "metadata": {
     "athlete_id": "REDACTED",
-    "last_updated": "2026-04-17T20:29:03.386731",
+    "last_updated": "2026-04-17T21:11:21.030366",
     "data_range_days": 7,
     "extended_range_days": 28,
     "version": "3.102"
@@ -165,7 +165,7 @@
       "atl": 11.69,
       "tsb": 11.01,
       "ramp_rate": -3.3,
-      "fitness_source": "Decayed from yesterday (today's planned workouts not yet completed)"
+      "fitness_source": "From Intervals.icu API (reflects completed workouts)"
     },
     "thresholds": {
       "eftp": 264.5,
@@ -427,15 +427,12 @@
       },
       "dfa_a1_profile": null
     },
-    "consistency_index": 0.0,
+    "consistency_index": null,
     "consistency_details": {
-      "planned_days": 1,
+      "planned_days": 0,
       "completed_days": 0,
       "matched_days": 0,
-      "planned_dates": [
-        "2026-04-17"
-      ],
-      "completed_dates": []
+      "note": "No planned workouts in period"
     },
     "phase_detection": {
       "phase": "Recovery",
@@ -493,13 +490,13 @@
     "p_max": 1010,
     "power_model_source": "wellness.sportInfo",
     "vo2max": null,
-    "calculation_timestamp": "2026-04-17T20:29:03.385658",
+    "calculation_timestamp": "2026-04-17T21:11:21.029242",
     "data_quality": {
       "hrv_data_points": 7,
       "rhr_data_points": 7,
       "activities_7d": 1,
       "activities_28d": 10,
-      "planned_workouts_7d": 1,
+      "planned_workouts_7d": 0,
       "ftp_history_days": {
         "indoor": 0,
         "outdoor": 0
@@ -1145,18 +1142,18 @@
   ],
   "planned_workouts": [
     {
-      "id": 104986204,
-      "date": "2026-04-17",
-      "name": "AE-7 \u2014 Progressieve opbouw Z2\u2192Z3 (indoor)",
+      "id": 104989091,
+      "date": "2026-04-18",
+      "name": "Zaterdag 2",
       "type": "WORKOUT",
-      "sport_type": "VirtualRide",
-      "planned_tss": 32,
-      "duration_hours": 0.58,
-      "duration_formatted": "35m",
+      "sport_type": "Ride",
+      "planned_tss": 49,
+      "duration_hours": 1.02,
+      "duration_formatted": "1h1m",
       "workout_summary": null,
       "has_terrain": false,
       "indoor": true,
-      "description": "- 10m 70%\n- 20m 80%\n- 5m 120W"
+      "description": "- Inrijden 12m ramp 50%-65%\n- Blok 1 15m 65-72%\n- Blok 2 15m 72-76%\n- Blok 3 10m 76-84%\n- Uitrijden stap 1 3m 65%\n- Uitrijden stap 2 5m 50%\n- 1m Z2"
     }
   ],
   "workout_summary_stats": {
