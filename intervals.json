@@ -1,0 +1,83 @@
+{
+  "generated_at": "2026-04-19T11:29:12.313762",
+  "version": "3.102",
+  "script_hash": "9a6a11cf71d2",
+  "scan_hours": 72,
+  "retention_days": 14,
+  "activities": [
+    {
+      "activity_id": "i141112474",
+      "date": "2026-04-19",
+      "type": "Ride",
+      "name": "Ochtendrit",
+      "interval_summary": [
+        "1x 3m29s 214w",
+        "1x 3m7s 215w"
+      ],
+      "intervals": [
+        {
+          "type": "RECOVERY",
+          "duration_secs": 3871,
+          "avg_power": 146,
+          "max_power": 481,
+          "avg_hr": 115,
+          "max_hr": 135,
+          "avg_cadence": 79.00498,
+          "zone": 1,
+          "training_load": 33.49399,
+          "decoupling": 0.8856437
+        },
+        {
+          "type": "WORK",
+          "label": "209s@214w93rpm",
+          "duration_secs": 209,
+          "avg_power": 214,
+          "max_power": 328,
+          "avg_hr": 135,
+          "max_hr": 141,
+          "avg_cadence": 92.72727,
+          "zone": 3,
+          "training_load": 3.5792165,
+          "decoupling": 7.071379
+        },
+        {
+          "type": "RECOVERY",
+          "duration_secs": 2272,
+          "avg_power": 174,
+          "max_power": 470,
+          "avg_hr": 127,
+          "max_hr": 142,
+          "avg_cadence": 82.765144,
+          "zone": 2,
+          "training_load": 27.725328,
+          "decoupling": 1.6414951
+        },
+        {
+          "type": "WORK",
+          "label": "187s@215w94rpm",
+          "duration_secs": 187,
+          "avg_power": 215,
+          "max_power": 413,
+          "avg_hr": 136,
+          "max_hr": 144,
+          "avg_cadence": 93.78075,
+          "zone": 3,
+          "training_load": 3.2327402,
+          "decoupling": 7.211305
+        },
+        {
+          "type": "RECOVERY",
+          "duration_secs": 4668,
+          "avg_power": 143,
+          "max_power": 630,
+          "avg_hr": 121,
+          "max_hr": 152,
+          "avg_cadence": 69.9382,
+          "zone": 1,
+          "training_load": 46.50416,
+          "decoupling": -7.4530945
+        }
+      ]
+    }
+  ]
+}
