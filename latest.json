@@ -70,7 +70,7 @@
   },
   "metadata": {
     "athlete_id": "REDACTED",
-    "last_updated": "2026-05-16T14:48:53.424271",
+    "last_updated": "2026-05-16T15:51:07.682355",
     "data_range_days": 7,
     "extended_range_days": 28,
     "version": "3.102"
@@ -602,7 +602,7 @@
     "p_max": 990,
     "power_model_source": "wellness.sportInfo",
     "vo2max": null,
-    "calculation_timestamp": "2026-05-16T14:48:53.423247",
+    "calculation_timestamp": "2026-05-16T15:51:07.681219",
     "data_quality": {
       "hrv_data_points": 7,
       "rhr_data_points": 7,
@@ -620,7 +620,7 @@
       "id": "i148809978",
       "date": "2026-05-16T13:51:10",
       "type": "Ride",
-      "name": "Afternoon Ride",
+      "name": "Afternoon ride",
       "duration_hours": 2.81,
       "distance_km": 75.99,
       "tss": 118,
